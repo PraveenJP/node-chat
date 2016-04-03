@@ -59,3 +59,7 @@ $form.on('submit',function(event){
     $message.focus();
     
 });
+
+setInterval(function(){ 
+    $("#scroll").scrollTop($("#scroll")[0].scrollHeight);
+}, 1000);
