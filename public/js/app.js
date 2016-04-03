@@ -3,12 +3,33 @@ var name = getQueryVariable('name') || 'Anonymous';
 var room = getQueryVariable('room');
 var socket = io();
 
-console.log(name+' '+room);
+// Check Window is active or not
+
+var isActive;
+
+window.onfocus = function () { 
+  isActive = true; 
+}; 
+
+window.onblur = function () { 
+  isActive = false; 
+}; 
+
+// End Check
+
+//console.log(name+' '+room);
 jQuery('.room').text(room);
+
+// Check User Connection
 socket.on('connect',function(){
    console.log('Connected to server'); 
+   socket.emit('joinRoom',{
+       name:name,
+       room:room
+   });
 });
 
+//Get Message
 socket.on('message', function(message){
    var momentTime = moment.utc(message.timestamp);
    var $message = jQuery('.message');
@@ -16,7 +37,9 @@ socket.on('message', function(message){
    console.log('New Message: '+message.text);
    $message.append('<p><strong>'+message.name+'</strong> '+momentTime.local().format('hh:mm a')+'</p>')
    $message.append('<p>'+message.text+'</p>');
-   //notifyMe(message.text);
+   if(isActive == false){
+      notifyMe(message.text,message.name);   
+   }
 });
 
 // Submit Message

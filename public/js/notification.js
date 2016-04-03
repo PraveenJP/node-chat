@@ -1,4 +1,4 @@
-function notifyMe(message) {
+function notifyMe(message,name) {
   if (!("Notification" in window)) {
     alert("This browser does not support desktop notification");
   }
@@ -6,9 +6,9 @@ function notifyMe(message) {
         var options = {
                 body: message,
                 icon: "../img/chat-icon.png",
-                //dir : "ltr"
+                dir : "ltr"
              };
-          var notification = new Notification("Let's Go Tweetz",options);
+          var notification = new Notification(name,options);
   }
   else if (Notification.permission !== 'denied') {
     Notification.requestPermission(function (permission) {
@@ -20,9 +20,9 @@ function notifyMe(message) {
         var options = {
               body: message,
               icon: "../img/chat-icon.png",
-              //dir : "ltr"
+              dir : "ltr"
           };
-        var notification = new Notification("Let's Go Tweetz",options);
+        var notification = new Notification(name,options);
       }
     });
   }

@@ -8,14 +8,27 @@ var moment = require('moment');
 
 app.use(express.static(__dirname + '/public'));
 
+var clientInfo = {};
+
+// Server Chat connection
 io.on('connection',function(socket){
    console.log('User is connected to socket.io');
+   
+   socket.on('joinRoom', function(req){
+       clientInfo[socket.id] = req;
+      socket.join(req.room);
+      socket.broadcast.to(req.room).emit('message',{
+        name:'System',
+        text: req.name + ' has Joined!',
+        timestamp: moment.valueOf()  
+      });
+   });
    
    socket.on('message', function(message){
       console.log('Message Received: '+message.text);
       message.timestamp = moment().valueOf();
       //socket.broadcast.emit('message', message); // send message to all sender except sender
-      io.emit('message', message); // send message to all users include sender
+      io.to(clientInfo[socket.id].room).emit('message', message); // send message to all users include sender
    });
    
    /*socket.emit('message',{
@@ -23,6 +36,7 @@ io.on('connection',function(socket){
    })*/
 });
 
+// Port Listen
 http.listen(PORT, function(err){
    if(err){
        console.log(err);
