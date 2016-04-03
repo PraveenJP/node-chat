@@ -85,9 +85,9 @@ glyphicon glyphicon-thumbs-up"></i> About Us</button>
         <script src="/js/app.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script type="text/javascript">            
-            // window.location.hash="no-back-button";
-            // window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
-            // window.onhashchange=function(){window.location.hash="no-back-button";}
+            window.location.hash="no-back-button";
+            window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+            window.onhashchange=function(){window.location.hash="no-back-button";}
             setInterval(function(){ 
                 $("#scroll").scrollTop($("#scroll")[0].scrollHeight);
             }, 1000);
