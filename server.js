@@ -11,13 +11,13 @@ io.on('connection',function(socket){
    
    socket.on('message', function(message){
       console.log('Message Received: '+message.text);
-      socket.broadcast.emit('message', message); // send message to all sender except sender
-      //io.emit('message', message); // send message to all users include sender
+      //socket.broadcast.emit('message', message); // send message to all sender except sender
+      io.emit('message', message); // send message to all users include sender
    });
    
-   socket.emit('message',{
+   /*socket.emit('message',{
        text: 'This is my first tweet'
-   })
+   })*/
 });
 
 http.listen(PORT, function(err){
