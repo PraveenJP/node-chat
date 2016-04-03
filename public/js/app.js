@@ -19,6 +19,7 @@ window.onblur = function () {
 
 //console.log(name+' '+room);
 jQuery('.room').text(room);
+jQuery('.user').text(name);
 
 // Check User Connection
 socket.on('connect',function(){
@@ -34,9 +35,8 @@ socket.on('message', function(message){
    var momentTime = moment.utc(message.timestamp);
    var $message = jQuery('.message');
    
-   console.log('New Message: '+message.text);
-   $message.append('<p><strong>'+message.name+'</strong> '+momentTime.local().format('hh:mm a')+'</p>')
-   $message.append('<p>'+message.text+'</p>');
+   //console.log('New Message: '+message.text);
+   $message.append('<li class="left clearfix"><span class="chat-img pull-left"><img width="40" src="img/chat-icon.png" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+message.name+'</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span> '+momentTime.local().format('hh:mm a')+'</small></div><p>'+message.text+'</p></div></li>');
    if(isActive == false){
       notifyMe(message.text,message.name);   
    }

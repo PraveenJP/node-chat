@@ -49,7 +49,7 @@ io.on('connection',function(socket){
    });
    
    socket.on('joinRoom', function(req){
-       clientInfo[socket.id] = req;
+      clientInfo[socket.id] = req;
       socket.join(req.room);
       socket.broadcast.to(req.room).emit('message',{
         name:'System',
@@ -59,7 +59,7 @@ io.on('connection',function(socket){
    });
    
    socket.on('message', function(message){
-      console.log('Message Received: '+message.text);
+      //console.log('Message Received: '+message.text);
       
       if(message.text === '@currentUsers'){
           sendCurrentUsers(socket);
