@@ -14,6 +14,19 @@ var clientInfo = {};
 io.on('connection',function(socket){
    console.log('User is connected to socket.io');
    
+   socket.on('disconnect', function(){
+       var userData = clientInfo[socket.id];
+       if(typeof userData !== 'undefined'){
+           socket.leave(userData.room);
+           io.to(userData.room).emit('message',{
+              name:'Sysetm',
+              text: userData.name+' has left!',
+              timestamp: moment.valueOf() 
+           });
+          delete clientInfo[socket.id];
+       }
+   });
+   
    socket.on('joinRoom', function(req){
        clientInfo[socket.id] = req;
       socket.join(req.room);
