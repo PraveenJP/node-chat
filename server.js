@@ -10,9 +10,9 @@ io.on('connection',function(socket){
    console.log('User is connected to socket.io');
    
    socket.on('message', function(message){
-      console.log('This is new message:' +message.text);
-      //socket.broadcast.emit('message', message); // send message to all sender except sender
-      io.emit('message', message); // send message to all users include sender
+      console.log('Message Received: '+message.text);
+      socket.broadcast.emit('message', message); // send message to all sender except sender
+      //io.emit('message', message); // send message to all users include sender
    });
    
    socket.emit('message',{
