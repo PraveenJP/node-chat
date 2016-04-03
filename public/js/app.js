@@ -6,8 +6,9 @@ socket.on('connect',function(){
 });
 
 socket.on('message', function(message){
+    var momentTime = moment.utc(message.timestamp);
    console.log('New Message: '+message.text);
-   jQuery('.message').append('<p>'+message.text+'</p>') 
+   jQuery('.message').append('<p>'+momentTime.local().format('MMM Do YYYY hh:mm a')+' : '+message.text+'</p>') 
 });
 
 // Submit Message
