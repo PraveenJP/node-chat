@@ -37,6 +37,7 @@ socket.on('message', function(message){
    
    //console.log('New Message: '+message.text);
    $message.append('<li class="left clearfix"><span class="chat-img pull-left"><img width="40" src="img/chat-icon.png" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+message.name+'</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span> '+momentTime.local().format('hh:mm a')+'</small></div><p>'+message.text+'</p></div></li>');
+   $('#scroll').animate({scrollTop: $('#scroll')[0].scrollHeight});
    if(isActive == false){
       notifyMe(message.text,message.name);   
    }
@@ -59,7 +60,3 @@ $form.on('submit',function(event){
     $message.focus();
     
 });
-
-setInterval(function(){ 
-    $("#scroll").scrollTop($("#scroll")[0].scrollHeight);
-}, 1000);
