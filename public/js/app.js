@@ -45,6 +45,13 @@ socket.on('message', function(message){
    }
 });
 
+socket.on('newImg', function(img) {
+	if(isActive == false){
+      notifyMe('Image File',name);   
+   	}
+    displayImage(name, img);
+});
+
 // Submit Message
 var $form = jQuery('#message-form');
 
@@ -60,6 +67,24 @@ $form.on('submit',function(event){
     $message.val('');
     $message.focus();
 });
+
+document.getElementById('sendImage').addEventListener('change', function() {
+    if (this.files.length != 0) {
+        var file = this.files[0],
+            reader = new FileReader();            
+        if (!reader) {
+            that._displayNewMsg('system', '!your browser doesn\'t support fileReader', 'red');
+            this.value = '';
+            return;
+        };
+        reader.onload = function(e) {
+            this.value = '';
+            socket.emit('newImg', e.target.result);
+            //displayImage(name, e.target.result);
+        };
+        reader.readAsDataURL(file);
+    };
+}, false);
 
 // Emoji Integration
 this.initialEmoji();
@@ -110,6 +135,13 @@ function showEmoji(msg) {
         };
     };
     return result;
+}
+
+function displayImage(user, imgData) {
+	var $message = jQuery('.message');
+	$message.append('<li class="left clearfix"><span class="chat-img pull-left"><img width="40" src="img/chat-icon.png" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+user+'</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span> </small></div><p><a href="' + imgData + '" target="_blank"><img class="img-res" src="' + imgData + '"/></a></p></div></li>');
+   $('#scroll').animate({scrollTop: $('#scroll')[0].scrollHeight});
+    
 }
 
 //Clear Message

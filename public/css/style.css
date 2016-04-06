@@ -140,3 +140,27 @@ body{
 #clearMsg{
     margin-right: 5px;
 }
+
+.img-res{
+    max-width: 100%;
+}
+
+.select-wrapper {
+    background: url(../img/upload.PNG) no-repeat;
+    background-size: cover;
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 124px;
+    bottom: 133px;
+    z-index: 99;
+}
+#sendImage {
+    width: 26px;
+    height: 26px;
+    margin-right: 100px;
+    opacity: 0;
+    filter: alpha(opacity=0); /* IE 5-7 */
+}

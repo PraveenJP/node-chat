@@ -72,6 +72,11 @@ io.on('connection',function(socket){
       // socket.broadcast.emit('message', message); // send message to all sender except sender
       // io.to(clientInfo[socket.id].room).emit('message', message); // send message to all users include sender
    });
+
+   //new image get
+    socket.on('newImg', function(imgData) {
+        io.to(clientInfo[socket.id].room).emit('newImg', imgData);
+    });
    
    /*socket.emit('message',{
        text: 'This is my first tweet'
