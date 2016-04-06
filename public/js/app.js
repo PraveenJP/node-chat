@@ -139,7 +139,7 @@ function showEmoji(msg) {
 
 function displayImage(user, imgData) {
 	var $message = jQuery('.message');
-	$message.append('<li class="left clearfix"><span class="chat-img pull-left"><img width="40" src="img/chat-icon.png" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+user+'</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span> </small></div><p><a href="' + imgData + '" target="_blank"><img class="img-res" src="' + imgData + '"/></a></p></div></li>');
+	$message.append('<li class="left clearfix"><span class="chat-img pull-left"><img width="40" src="img/chat-icon.png" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+user+'</strong><small class="pull-right text-muted"></small></div><p><a href="' + imgData + '" target="_blank"><img class="img-res" src="' + imgData + '"/></a></p></div></li>');
    $('#scroll').animate({scrollTop: $('#scroll')[0].scrollHeight});
     
 }

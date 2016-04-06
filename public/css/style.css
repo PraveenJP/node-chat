@@ -107,28 +107,19 @@ body{
 
 .cus_icon_btn{
     position: absolute;
-    right: 97px;
-    bottom: 131px;
+    right: 100px;
+    bottom: 132px;
     z-index: 999;
     background: transparent;
     border: none;
+    opacity: 0.8;
+}
+
+.cus_icon_btn>img{
+    opacity: 0.6;
 }
 
 .cus_icon_btn:focus{
-    color:none !important;
-    outline: none !important;
-}
-
-.cus_icon_btn_pic{
-    position: absolute;
-    right: 120px;
-    bottom: 131px;
-    z-index: 999;
-    background: transparent;
-    border: none;
-}
-
-.cus_icon_btn_pic:focus{
     color:none !important;
     outline: none !important;
 }
@@ -153,14 +144,15 @@ body{
     width: 20px;
     height: 20px;
     position: absolute;
-    right: 124px;
+    right: 140px;
     bottom: 133px;
     z-index: 99;
+    opacity: 0.6;
 }
 #sendImage {
     width: 26px;
     height: 26px;
-    margin-right: 100px;
+    margin-right: 50px;
     opacity: 0;
     filter: alpha(opacity=0); /* IE 5-7 */
 }
