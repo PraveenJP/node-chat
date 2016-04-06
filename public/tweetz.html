@@ -34,7 +34,8 @@ glyphicon glyphicon-thumbs-up"></i> About Us</button>
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-comment"></i>
                                         </span>
-                                        <input class="form-control send-input" type="text" name="message" placeholder="Message.." required/>
+                                        <input id="messageInput" class="form-control send-input" type="text" name="message" placeholder="Message.." required/>
+                                        <div id="emojiWrapper"></div>
                                         <span class="input-group-addon">
                                             <button class="btn-link cus-link" type="submit"><i class="glyphicon glyphicon-send"></i></button>
                                         </span>
@@ -43,6 +44,12 @@ glyphicon glyphicon-thumbs-up"></i> About Us</button>
                                     <p>To find room current users type <kbd>@currentUsers</kbd> in message box.</p>
                                 </div>
                             </form>  
+                            <button id="emoji" class="cus_icon_btn">
+                                <i class="glyphicon glyphicon-heart-empty"></i>
+                            </button>
+                            <!--<button  class="cus_icon_btn_pic">
+                                <i class="glyphicon glyphicon-picture"></i>
+                            </button>-->
                         </div>
                     </div>
                 </div>
