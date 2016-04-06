@@ -5,6 +5,7 @@
         <title>Let's Go Tweetz</title>
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" >
         <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./css/toastr.min.css"/>
         <link rel="stylesheet" href="./css/style.css"/>
     </head>
     <body>
@@ -16,40 +17,42 @@
                             <label>Hello, <p class="user"></p></label>
                             <button  data-toggle="modal" data-target="#about" class="btn btn-default pull-right"><i class="
 glyphicon glyphicon-thumbs-up"></i> About Us</button>
-                        </div>
-                        <a class="btn btn-warning pull-right" href="/"><i class="glyphicon glyphicon-off"></i> Leave Group</a>
+                        </div>        
+                        <a class="btn btn-warning pull-right" href="/"><i class="glyphicon glyphicon-off"></i></a>                        
+                        <button id="clearMsg" class="btn btn-success pull-right"><i class="glyphicon glyphicon-refresh"></i></button>
                         <div class="panel panel-primary">
-                        <div class="panel-heading"> 
-                            <p>Room Name:<h4 class="room"></h4></p>
-                        </div>
-                        <div class="panel-body"  id="scroll">
-                            <ul class="chat message">
-                                <!--Message Here-->
-                            </ul>
-                        </div>
-                        <div class="panel-footer">
-                            <form id="message-form" autocomplete="off">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-comment"></i>
-                                        </span>
-                                        <input id="messageInput" class="form-control send-input" type="text" name="message" placeholder="Message.." required/>
-                                        <div id="emojiWrapper"></div>
-                                        <span class="input-group-addon">
-                                            <button class="btn-link cus-link" type="submit"><i class="glyphicon glyphicon-send"></i></button>
-                                        </span>
+                            <div class="panel-heading"> 
+                                <p>Room Name:<h4 class="room"></h4></p>
+                            </div>
+                            <div class="panel-body"  id="scroll">
+                                <ul class="chat message">
+                                    <!--Message Here-->
+                                </ul>
+                            </div>
+                            <div class="panel-footer">
+                                <form id="message-form" autocomplete="off">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-comment"></i>
+                                            </span>
+                                            <input id="messageInput" class="form-control send-input" type="text" name="message" placeholder="Message.." required/>
+                                            <div id="emojiWrapper"></div>
+                                            <span class="input-group-addon">
+                                                <button class="btn-link cus-link" type="submit"><i class="glyphicon glyphicon-send"></i></button>
+                                            </span>
+                                        </div>
+                                        <h4>Info:</h4>
+                                        <p>To find room current users type <kbd>@currentUsers</kbd> in message box.</p>
                                     </div>
-                                    <h4>Info:</h4>
-                                    <p>To find room current users type <kbd>@currentUsers</kbd> in message box.</p>
-                                </div>
-                            </form>  
-                            <button id="emoji" class="cus_icon_btn">
-                                <i class="glyphicon glyphicon-heart-empty"></i>
-                            </button>
-                            <!--<button  class="cus_icon_btn_pic">
-                                <i class="glyphicon glyphicon-picture"></i>
-                            </button>-->
+                                </form>  
+                                <button id="emoji" class="cus_icon_btn">
+                                    <i class="glyphicon glyphicon-heart-empty"></i>
+                                </button>
+                                <!--<button  class="cus_icon_btn_pic">
+                                    <i class="glyphicon glyphicon-picture"></i>
+                                </button>-->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,6 +90,7 @@ glyphicon glyphicon-thumbs-up"></i> About Us</button>
         <script src="/js/jquery-2.2.2.min.js"></script>
         <script src="/js/socket.io-1.4.5.js"></script>
         <script src="/js/moment.min.js"></script>
+        <script src="/js/toastr.min.js"></script>
         <script src="/js/notification.js"></script>
         <script src="/js/QueryParams.js"></script>
         <script src="/js/app.js"></script>

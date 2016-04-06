@@ -137,3 +137,6 @@ body{
     max-width: 100%;
     height: auto;
 }
+#clearMsg{
+    margin-right: 5px;
+}

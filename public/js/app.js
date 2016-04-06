@@ -3,6 +3,8 @@ var name = getQueryVariable('name') || 'Anonymous';
 var room = getQueryVariable('room');
 var socket = io();
 
+toastr.success('Welcome '+name, 'Let\'s Go Tweetz');
+
 // Check Window is active or not
 
 var isActive;
@@ -109,3 +111,9 @@ function showEmoji(msg) {
     };
     return result;
 }
+
+//Clear Message
+jQuery('#clearMsg').click(function(){
+    jQuery('.message').empty();
+    toastr.success('Message cleared', 'Let\'s Go Tweetz');
+});
