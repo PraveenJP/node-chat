@@ -6,18 +6,13 @@ var socket = io();
 toastr.success('Welcome '+name, 'Let\'s Go Tweetz');
 
 // Check Window is active or not
-
 var isActive;
-
 window.onfocus = function () { 
   isActive = true; 
 }; 
-
 window.onblur = function () { 
   isActive = false; 
 }; 
-
-// End Check
 
 //console.log(name+' '+room);
 jQuery('.room').text(room);
@@ -49,7 +44,7 @@ socket.on('newImg', function(img) {
 	if(isActive == false){
       notifyMe('Image File',name);   
    	}
-    displayImage(name, img);
+    displayImage(img);
 });
 
 // Submit Message
@@ -70,16 +65,24 @@ $form.on('submit',function(event){
 
 document.getElementById('sendImage').addEventListener('change', function() {
     if (this.files.length != 0) {
+        var type = this.files[0].name        
+        if(!/(\.jpg|\.jpeg|\.png|\.gif)$/i.test(type)){
+          toastr.error('Image invalid!', 'Let\'s Go Tweetz');
+          return false;
+        }
         var file = this.files[0],
             reader = new FileReader();            
         if (!reader) {
-            that._displayNewMsg('system', '!your browser doesn\'t support fileReader', 'red');
+            displayNewMsg('system', '!your browser doesn\'t support fileReader', 'red');
             this.value = '';
             return;
         };
         reader.onload = function(e) {
             this.value = '';
-            socket.emit('newImg', e.target.result);
+            socket.emit('newImg', {
+              name:name,
+              img:e.target.result
+            });
             //displayImage(name, e.target.result);
         };
         reader.readAsDataURL(file);
@@ -112,7 +115,7 @@ document.getElementById('emojiWrapper').addEventListener('click', function(e) {
 function initialEmoji(){
     var emojiContainer = document.getElementById('emojiWrapper'),
         docFragment = document.createDocumentFragment();
-    for (var i = 69; i > 0; i--) {
+    for (var i = 157; i > 0; i--) {
         var emojiItem = document.createElement('img');
         emojiItem.src = '../content/emoji/' + i + '.gif';
         emojiItem.title = i;
@@ -137,9 +140,10 @@ function showEmoji(msg) {
     return result;
 }
 
-function displayImage(user, imgData) {
+function displayImage(imgData) {
+  var momentTime = moment.utc(imgData.timestamp);
 	var $message = jQuery('.message');
-	$message.append('<li class="left clearfix"><span class="chat-img pull-left"><img width="40" src="img/chat-icon.png" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+user+'</strong><small class="pull-right text-muted"></small></div><p><a href="' + imgData + '" target="_blank"><img class="img-res" src="' + imgData + '"/></a></p></div></li>');
+	$message.append('<li class="left clearfix"><span class="chat-img pull-left"><img width="40" src="img/chat-icon.png" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">'+imgData.name+'</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span> '+momentTime.local().format('hh:mm a')+'</small></div><p><a href="' + imgData.img + '" target="_blank"><img class="img-res" src="' + imgData.img + '"/></a></p></div></li>');
    $('#scroll').animate({scrollTop: $('#scroll')[0].scrollHeight});
     
 }
