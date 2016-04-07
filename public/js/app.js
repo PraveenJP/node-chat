@@ -185,6 +185,7 @@ socket.on("isTyping", function(data) {
   if (data.val) {
     if ($("#"+data.name+"").length === 0) {
       $message.append("<li id='"+ data.name +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.name + " is typing.</small></li>");
+      $('#scroll').animate({scrollTop: $('#scroll')[0].scrollHeight});
       timeout = setTimeout(timeoutFunction, 5000);
     }
   } else {
