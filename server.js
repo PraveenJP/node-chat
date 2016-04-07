@@ -79,7 +79,7 @@ io.on('connection',function(socket){
     });
 
     socket.on("typing", function(data) {        
-        io.to(clientInfo[socket.id].room).emit("isTyping", data);
+        socket.broadcast.to(clientInfo[socket.id].room).emit("isTyping", data);
     });
    
    /*socket.emit('message',{
