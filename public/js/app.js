@@ -153,3 +153,41 @@ jQuery('#clearMsg').click(function(){
     jQuery('.message').empty();
     toastr.success('Message cleared', 'Let\'s Go Tweetz');
 });
+
+var typing = false;  
+var timeout = undefined;
+
+function timeoutFunction() {  
+  typing = false;
+  socket.emit("typing", {
+    name:name,
+    val:false
+  });
+}
+
+$("#messageInput").keypress(function(e){
+  if (e.which !== 13) {
+    if (typing === false && $("#messageInput").is(":focus")) {
+      typing = true;
+      socket.emit("typing",{           
+          name:name,
+          val:true
+        });
+    } else {
+      clearTimeout(timeout);
+      timeout = setTimeout(timeoutFunction, 5000);
+    }
+  }
+});
+
+socket.on("isTyping", function(data) {  
+  var $message = jQuery('.message');
+  if (data.val) {
+    if ($("#"+data.name+"").length === 0) {
+      $message.append("<li id='"+ data.name +"'><span class='text-muted'><small><i class='fa fa-keyboard-o'></i>" + data.name + " is typing.</small></li>");
+      timeout = setTimeout(timeoutFunction, 5000);
+    }
+  } else {
+    $("#"+data.name+"").remove();
+  }
+});

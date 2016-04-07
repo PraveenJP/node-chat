@@ -77,6 +77,10 @@ io.on('connection',function(socket){
     socket.on('newImg', function(imgData) {
         io.to(clientInfo[socket.id].room).emit('newImg', imgData);
     });
+
+    socket.on("typing", function(data) {        
+        io.to(clientInfo[socket.id].room).emit("isTyping", data);
+    });
    
    /*socket.emit('message',{
        text: 'This is my first tweet'
